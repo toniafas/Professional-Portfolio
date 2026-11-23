@@ -221,7 +221,7 @@ nav ul a.on{color:var(--ink);box-shadow:0 2px 0 var(--accent)}
   </div>
 
   <article class="card rv" id="artifact-1">
-    <div class="visual tlv"><span class="num">AI</span><div class="tlread" id="tlread" aria-live="polite"></div><div class="tl" id="tl"></div><div class="tlhint">Tap a milestone</div></div>
+    <div class="visual tlv"><span class="num" id="tlnum" aria-hidden="true">1950</span><div class="tlread" id="tlread" aria-live="polite"></div><div class="tl" id="tl"></div><div class="tlhint">Tap a milestone</div></div>
     <div class="body">
       <span class="tag">Artifact 01 · Visual storytelling</span>
       <h3 class="serif">AI &amp; ML Timeline: The Evolution of Artificial Intelligence and Machine Learning</h3>
@@ -324,7 +324,7 @@ if(orb&&matchMedia('(hover:hover)').matches&&!matchMedia('(prefers-reduced-motio
 const ms=[['1950','Turing Test','Alan Turing asks whether machines can think.'],['1956','Dartmouth Conference','AI is established as a distinct field.'],['1973–80','First AI winter','Unmet expectations lead to declining interest.'],['1997','Deep Blue','IBM’s computer defeats chess champion Garry Kasparov.'],['2012','AlexNet','Deep learning transforms image recognition.'],['2017','Transformers','“Attention Is All You Need” introduces the foundation model.'],['2022','ChatGPT','Conversational AI reaches the mainstream.']];
 const tl=document.getElementById('tl'),rd=document.getElementById('tlread');let cur=0,timer;
 const btns=ms.map((m,i)=>{const b=document.createElement('button');b.style.left=(i*100/(ms.length-1))+'%';b.setAttribute('aria-label',m[0]+' '+m[1]);b.onclick=()=>{clearInterval(timer);show(i)};tl.appendChild(b);return b});
-function show(i){cur=i;btns.forEach((b,j)=>b.classList.toggle('on',j===i));const m=ms[i];rd.innerHTML='<b>'+m[0]+' · '+m[1]+'</b>'+m[2]}
+function show(i){cur=i;btns.forEach((b,j)=>b.classList.toggle('on',j===i));const m=ms[i];const tn=document.getElementById('tlnum');if(tn)tn.textContent=m[0].split('–')[0];rd.innerHTML='<b>'+m[0]+' · '+m[1]+'</b>'+m[2]}
 show(0);
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches)timer=setInterval(()=>show((cur+1)%ms.length),3200);
 }catch(e){}
